@@ -1,4 +1,5 @@
 import argparse
+import time
 import json
 import os
 
@@ -27,10 +28,44 @@ def write_json(data):
 def add_task(task):
     data = read_json()
     task_id = len(data["tasks"]) 
-    new_task = {"id": task_id, "description": task}
+    task_time = time.ctime(time.time())
+    task_status = "todo"
+    new_task = {"id": task_id, "description": task, "status": task_status, "createdAt": task_time, "updatedAt": task_time}
     data["tasks"].append(new_task)
     write_json(data)
     print(f'Task "{task}" added successfully with ID = "{task_id}".')
+
+def update_task(id,new_task):
+    data = read_json()
+    find = False
+    for i in data["tasks"]:
+        if i["id"] == id:
+            find = True
+            i["description"] = new_task
+            i["updatedAt"] = time.ctime(time.time())
+            write_json(data)
+            print(f'Task ID = "{id}" updated successfully to "{new_task}".')
+    if find == False:
+        print(f"Task ID = \"{id}\" doesn\'t exists.")
+            
+def delete_task(id):
+    data = read_json()
+    find = False
+    for i in data["tasks"]:
+        if i["id"] == id:
+            find = True
+            data["tasks"].pop(id)
+            write_json(data)
+    if find == False:
+        print(f"Task ID = \"{id}\" doesn\'t exists.")
+    else:
+        data = read_json()
+        for i in data["tasks"]:
+            if i["id"] > int(id):
+                i["id"] = i["id"] - 1
+        write_json(data)
+        print(f'Task ID = "{id}" deleted successfully.')
+
     
 # Function that lists all the tasks of the JSON file
 def list_tasks():
@@ -52,6 +87,14 @@ def main():
     # Comando para listar las tareas
     list_parser = subparsers.add_parser("list", help="List all the tasks")
 
+    update_parser = subparsers.add_parser("update", help="Update a task")
+    update_parser.add_argument("id", type=int, help="ID of the task")
+    update_parser.add_argument("new_task", type=str, help="New description of the task")
+    
+    delete_parser = subparsers.add_parser("delete", help="Delete a task")
+    delete_parser.add_argument("id", type=int, help="ID of the task")
+    
+
     # Parsear los argumentos
     args = parser.parse_args()
 
@@ -60,8 +103,10 @@ def main():
         add_task(args.task)
     elif args.command == "list":
         list_tasks()
-    elif args.command == "remove":
-        remove_task(args.index)
+    elif args.command == "update":
+        update_task(args.id, args.new_task)
+    elif args.command == "delete":
+       delete_task(args.id)
     else:
         parser.print_help()
 

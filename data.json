@@ -2,11 +2,31 @@
     "tasks": [
         {
             "id": 0,
-            "description": "Aprender Python"
+            "description": "Aprender Python",
+            "status": "todo",
+            "createdAt": "Fri Jan 24 14:30:40 2025",
+            "updatedAt": "Fri Jan 24 14:30:40 2025"
         },
         {
             "id": 1,
-            "description": "Comer"
+            "description": "Lavar ropa",
+            "status": "todo",
+            "createdAt": "Fri Jan 24 14:30:46 2025",
+            "updatedAt": "Fri Jan 24 14:54:45 2025"
+        },
+        {
+            "id": 2,
+            "description": "Ir al trabajo",
+            "status": "todo",
+            "createdAt": "Fri Jan 24 15:17:57 2025",
+            "updatedAt": "Fri Jan 24 15:19:38 2025"
+        },
+        {
+            "id": 3,
+            "description": "Comer ensalada",
+            "status": "todo",
+            "createdAt": "Fri Jan 24 15:18:10 2025",
+            "updatedAt": "Fri Jan 24 15:18:54 2025"
         }
     ]
 }
