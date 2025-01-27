@@ -66,9 +66,45 @@ def delete_task(id):
         write_json(data)
         print(f'Task ID = "{id}" deleted successfully.')
 
-    
+def mark_in_progress(id):
+    data = read_json()
+    find = False
+    for i in data["tasks"]:
+        if i["id"] == id:
+            find = True
+            i["status"] = "in-progress"
+            write_json(data)
+            print(f'Task ID = "{id}" marked successfully to "in-progress".')
+    if find == False:
+        print(f"Task ID = \"{id}\" doesn\'t exists.")
+  
+  
+def mark_done(id):
+    data = read_json()
+    find = False
+    for i in data["tasks"]:
+        if i["id"] == id:
+            find = True
+            i["status"] = "done"
+            write_json(data)
+            print(f'Task ID = "{id}" marked successfully to "done".')
+    if find == False:
+        print(f"Task ID = \"{id}\" doesn\'t exists.")
+        
+def mark_todo(id):
+    data = read_json()
+    find = False
+    for i in data["tasks"]:
+        if i["id"] == id:
+            find = True
+            i["status"] = "todo"
+            write_json(data)
+            print(f'Task ID = "{id}" marked successfully to "todo".')
+    if find == False:
+        print(f"Task ID = \"{id}\" doesn\'t exists.")
+          
 # Function that lists all the tasks of the JSON file
-def list_tasks():
+def list_tasks(status="all"):
     data = read_json()
     for i in data["tasks"]:
         print(i['id'],i['description'])
@@ -86,6 +122,8 @@ def main():
     
     # Comando para listar las tareas
     list_parser = subparsers.add_parser("list", help="List all the tasks")
+    list_parser.add_argument("status", type=str, help="Status of the task", nargs="?",  default="all")
+
 
     update_parser = subparsers.add_parser("update", help="Update a task")
     update_parser.add_argument("id", type=int, help="ID of the task")
@@ -94,6 +132,14 @@ def main():
     delete_parser = subparsers.add_parser("delete", help="Delete a task")
     delete_parser.add_argument("id", type=int, help="ID of the task")
     
+    mark_in_progress_parser = subparsers.add_parser("mark-in-progress", help="Mark a task as \"in-progress\"")
+    mark_in_progress_parser.add_argument("id", type=int, help="ID of the task")
+    
+    mark_done_parser = subparsers.add_parser("mark-done", help="Mark a task as \"done\"")
+    mark_done_parser.add_argument("id", type=int, help="ID of the task")
+    
+    mark_todo_parser = subparsers.add_parser("mark-todo", help="Mark a task as \"todo\"")
+    mark_todo_parser.add_argument("id", type=int, help="ID of the task")
 
     # Parsear los argumentos
     args = parser.parse_args()
@@ -102,11 +148,17 @@ def main():
     if args.command == "add":
         add_task(args.task)
     elif args.command == "list":
-        list_tasks()
+        list_tasks(args.status)
     elif args.command == "update":
         update_task(args.id, args.new_task)
     elif args.command == "delete":
        delete_task(args.id)
+    elif args.command == "mark-in-progress":
+        mark_in_progress(args.id)
+    elif args.command == "mark-done":
+        mark_done(args.id)
+    elif args.command == "mark-todo":
+        mark_todo(args.id)
     else:
         parser.print_help()
 
