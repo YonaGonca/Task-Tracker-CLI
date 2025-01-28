@@ -2,52 +2,10 @@
     "tasks": [
         {
             "id": 0,
-            "description": "Lavar ropa",
-            "status": "todo",
-            "createdAt": "Fri Jan 24 14:30:46 2025",
-            "updatedAt": "Fri Jan 24 14:54:45 2025"
-        },
-        {
-            "id": 1,
-            "description": "Ir al trabajo",
+            "description": "Comer bien",
             "status": "in-progress",
-            "createdAt": "Fri Jan 24 15:17:57 2025",
-            "updatedAt": "Fri Jan 24 15:19:38 2025"
-        },
-        {
-            "id": 2,
-            "description": "Comer ensalada",
-            "status": "in-progress",
-            "createdAt": "Fri Jan 24 15:18:10 2025",
-            "updatedAt": "Fri Jan 24 15:18:54 2025"
-        },
-        {
-            "id": 3,
-            "description": "Tirar basura",
-            "status": "done",
-            "createdAt": "Tue Jan 28 10:03:10 2025",
-            "updatedAt": "Tue Jan 28 10:03:10 2025"
-        },
-        {
-            "id": 4,
-            "description": "Aprender Python",
-            "status": "done",
-            "createdAt": "Tue Jan 28 10:03:59 2025",
-            "updatedAt": "Tue Jan 28 10:03:59 2025"
-        },
-        {
-            "id": 5,
-            "description": "Hacer Portfolio",
-            "status": "todo",
-            "createdAt": "Tue Jan 28 10:04:12 2025",
-            "updatedAt": "Tue Jan 28 10:04:12 2025"
-        },
-        {
-            "id": 6,
-            "description": "Estudiar Ingles",
-            "status": "todo",
-            "createdAt": "Tue Jan 28 10:04:23 2025",
-            "updatedAt": "Tue Jan 28 10:04:23 2025"
+            "createdAt": "Tue Jan 28 11:12:02 2025",
+            "updatedAt": "Tue Jan 28 11:12:41 2025"
         }
     ]
 }

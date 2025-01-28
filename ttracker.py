@@ -27,27 +27,44 @@ def write_json(data):
 # Function that add a task to the JSON file
 def add_task(task):
     data = read_json()
-    task_id = len(data["tasks"]) 
-    task_time = time.ctime(time.time())
-    task_status = "todo"
-    new_task = {"id": task_id, "description": task, "status": task_status, "createdAt": task_time, "updatedAt": task_time}
-    data["tasks"].append(new_task)
-    write_json(data)
-    print(f'Task "{task}" added successfully with ID = "{task_id}".')
+    exists = False
+    for i in data["tasks"]:
+        if i["description"] == task:
+            exists = True
+            print(f'Task "{task}" already exists.')
+    if exists == False and len(task)>0:
+        task_id = len(data["tasks"]) 
+        task_time = time.ctime(time.time())
+        task_status = "todo"
+        new_task = {"id": task_id, "description": task, "status": task_status, "createdAt": task_time, "updatedAt": task_time}
+        data["tasks"].append(new_task)
+        write_json(data)
+        print(f'Task "{task}" added successfully with ID = "{task_id}".')
+    elif len(task) == 0:
+        print(f'Description of the task needed.')
 
 # Function that update a task description to a new one
 def update_task(id,new_task):
     data = read_json()
-    find = False
+    exists = False
     for i in data["tasks"]:
-        if i["id"] == id:
-            find = True
-            i["description"] = new_task
-            i["updatedAt"] = time.ctime(time.time())
-            write_json(data)
-            print(f'Task ID = "{id}" updated successfully to "{new_task}".')
-    if find == False:
-        print(f"Task ID = \"{id}\" doesn\'t exists.")
+        if i["description"] == new_task:
+            exists = True
+            print(f'Task "{new_task}" already exists.')
+    find = False
+    if exists == False and len(new_task)>0:
+        for i in data["tasks"]:
+            if i["id"] == id:
+                find = True
+                i["description"] = new_task
+                i["updatedAt"] = time.ctime(time.time())
+                write_json(data)
+                print(f'Task ID = "{id}" updated successfully to "{new_task}".')
+        if find == False:
+            print(f"Task ID = \"{id}\" doesn\'t exists.")
+    elif len(new_task) == 0:
+        print(f'Description of the new task needed.')
+
    
 # Function that delete a task of the JSON file with an specific id     
 def delete_task(id):
@@ -76,6 +93,7 @@ def mark_in_progress(id):
         if i["id"] == id:
             find = True
             i["status"] = "in-progress"
+            i["updatedAt"] = time.ctime(time.time())
             write_json(data)
             print(f'Task ID = "{id}" marked successfully to "in-progress".')
     if find == False:
@@ -89,6 +107,7 @@ def mark_done(id):
         if i["id"] == id:
             find = True
             i["status"] = "done"
+            i["updatedAt"] = time.ctime(time.time())
             write_json(data)
             print(f'Task ID = "{id}" marked successfully to "done".')
     if find == False:
@@ -102,6 +121,7 @@ def mark_todo(id):
         if i["id"] == id:
             find = True
             i["status"] = "todo"
+            i["updatedAt"] = time.ctime(time.time())
             write_json(data)
             print(f'Task ID = "{id}" marked successfully to "todo".')
     if find == False:
@@ -110,6 +130,8 @@ def mark_todo(id):
 # Function that lists the tasks of the JSON file, can list all together or by status
 def list_tasks(status="all"):
     data = read_json()
+    if len(data["tasks"]) == 0:
+        print("There are not tasks to list")
     if status == "all":
         for i in data["tasks"]:
             print(i['id'],i['description'])
