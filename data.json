@@ -1,11 +1,4 @@
 {
     "tasks": [
-        {
-            "id": 0,
-            "description": "Comer bien",
-            "status": "in-progress",
-            "createdAt": "Tue Jan 28 11:12:02 2025",
-            "updatedAt": "Tue Jan 28 11:12:41 2025"
-        }
     ]
 }
