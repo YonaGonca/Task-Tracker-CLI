@@ -110,4 +110,5 @@ This project is open source and available under the [MIT License](LICENSE).
 ## Acknowledgments
 
 - Python for providing the tools to build this CLI.
+- roadmap.sh to having projects ideas https://roadmap.sh/projects/task-tracker
 
