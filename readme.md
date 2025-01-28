@@ -96,7 +96,7 @@ This project uses a JSON file (`data.json`) to store task data. The file is auto
 
 ## Code Structure
 
-- `tttracker.py`: The main Python script containing the logic for managing tasks.
+- `ttracker.py`: The main Python script containing the logic for managing tasks.
 - `data.json`: The JSON file that stores task data.
 
 ## Contributing
